@@ -1,0 +1,6 @@
+User-agent: nsa
+Disallow: /
+
+User-agent: *
+Allow: /humans.txt
+Disallow: /
