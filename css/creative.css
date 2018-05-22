@@ -18,6 +18,10 @@ hr.light {
   border-color: #fff;
 }
 
+br {
+  line-height: 100%
+}
+
 a {
   color: #F05F40;
   font-weight: bold;
