@@ -23,11 +23,16 @@ br {
 }
 
 table, th, td {
-    border: 5px solid white;
+  border-spacing: 10px;
+}
+
+table {
+
 }
 
 td {
   text-align:left;
+  color: black;
 }
 
 a {
