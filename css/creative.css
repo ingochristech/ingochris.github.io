@@ -20,14 +20,15 @@ hr.light {
 
 a {
   color: #F05F40;
-  font-weight: 1000;
+  font-weight: bold;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s;
 }
 
 a:hover {
-  color: #f05f40;
+  color: #212529;
+  font-weight: 1000;
 }
 
 h1,
