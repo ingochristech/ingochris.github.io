@@ -597,27 +597,470 @@
       <hr class="my-4">
             <div class="row">
 
-                    <div class="col-lg-4 text-center">
+                    <div class="col-lg-3 text-center">
                         <!-- 7 lines in a lg-4 col -->
-                        <p>42 University of Silicon Valley</p>
+                        <p>42 University of Silicon Valley<br>Fremont, California</p>
                         <p class="text-faded">Computer Science</p>
                     </div>
 
-                    <div class="col-lg-4 text-center">
+                    <div class="col-lg-3 text-center">
+                        <!-- 9 lines in a lg-4 col -->
+                        <p>Cisco Network Academy<br>Santa Clara, California</p>
+                        <p class="text-faded">Cyber Ops, Routing & Switching</p>
+                    </div>
+
+                    <div class="col-lg-3 text-center">
                         <!-- 8 lines in a lg-4 col -->
-                        <p>Rochester Institute of Technology (RITx)</p>
+                        <p>Rochester Institute of Technology<br>RITx</p>
                         <p class="text-faded">Cybersecurity</p>
                     </div>
 
-                    <div class="col-lg-4 text-center">
+                    <div class="col-lg-3 text-center">
                         <!-- 9 lines in a lg-4 col -->
-                        <p>Mission College of Santa Clara</p>
-                        <p class="text-faded">Ethical Hacking</p>
+                        <p>Mission College<br>Santa Clara</p>
+                        <p class="text-faded">Ethical Hacking, Kinesiology</p>
                     </div>
+
                   </div>
 
         <h2 class="mb-4">Select Coursework</h2>
 <!--        <a class="btn btn-light btn-xl sr-button" href="https://devpost.com/ingochris">Devpost Portfolio</a>-->
+      
+          <div ng-bind-html="trustedHtml" class="ng-binding">
+             <table align="center">
+                  <thead>
+                      <tr>
+                          <th>SECTION</th>
+                          <th>TITLE</th>
+                          <th>AUTHORITY</th>
+                          <th>STATUS</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>CIS037A</td>
+                          <td>C Programming</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIS045</td>
+                          <td>Linux Essentials</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIS046</td>
+                          <td>Shell Programming</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIS047</td>
+                          <td>Linux System Administration</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIT012</td>
+                          <td>Computer Networks</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIT016</td>
+                          <td>IT Security and Ethical Hacking</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIT021</td>
+                          <td>Cisco Network Fundamentals (Cisco-1)</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CIT022</td>
+                          <td>Routing Protocols and Concepts (Cisco-2)</td>
+                          <td>Mission College</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CS50X</td>
+                          <td>Computer Science 50</td>
+                          <td>Harvard University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CS101SP</td>
+                          <td>Computer Science in JavaScript</td>
+                          <td>Stanford University</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CS001U</td>
+                          <td>Practical UNIX</td>
+                          <td>Stanford University</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CS106A</td>
+                          <td>Programming Methodology in Java</td>
+                          <td>Stanford University</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CS106B</td>
+                          <td>Programming Abstraction in C++</td>
+                          <td>Stanford University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CS107</td>
+                          <td>Programming Paradigms in C</td>
+                          <td>Stanford University</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CS142</td>
+                          <td>Web Applications</td>
+                          <td>Stanford University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CS143</td>
+                          <td>Compilers</td>
+                          <td>Stanford University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CS145</td>
+                          <td>SQL Relational Databases</td>
+                          <td>Stanford University</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CS147</td>
+                          <td>Human Computer Interaction Design</td>
+                          <td>Stanford University</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CS154</td>
+                          <td>Automata and Complexity Theory</td>
+                          <td>Stanford University</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CS161</td>
+                          <td>Algorithms: Design and Analysis</td>
+                          <td>Stanford University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CS223A</td>
+                          <td>Robotics</td>
+                          <td>Stanford University</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CS228</td>
+                          <td>Probabilistic Graphical Models</td>
+                          <td>Stanford University</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CS229</td>
+                          <td>Machine Learning</td>
+                          <td>Stanford University</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CS231n</td>
+                          <td>Convolutional Neural Networks</td>
+                          <td>Stanford University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CS236</td>
+                          <td>Mining Massive Datasets</td>
+                          <td>Stanford University</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CS255</td>
+                          <td>Cryptography</td>
+                          <td>Stanford University</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CY501</td>
+                          <td>Cybersecurity Fundamentals</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY502</td>
+                          <td>Computer Forensics</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY503</td>
+                          <td>Cybersecurity Risk Management</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY504</td>
+                          <td>Network Security</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY525</td>
+                          <td>Cybersecurity Capstone</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CY601</td>
+                          <td>Research Methods and Proposal Development</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY603</td>
+                          <td>Enterprise Security</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY604</td>
+                          <td>Cryptography and Authentication</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY742</td>
+                          <td>Computer System Security</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY731</td>
+                          <td>Web Server and Application Security Audits</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY743</td>
+                          <td>Computer Viruses and Malicious Software</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY793</td>
+                          <td>Capstone for Computing Security</td>
+                          <td>Rochester Institute of Technology</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY1000</td>
+                          <td>CompTIA A+</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY1001</td>
+                          <td>CompTIA Cloud+</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY1002</td>
+                          <td>Cryptography</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY1003</td>
+                          <td>HIPAA Training</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY1006</td>
+                          <td>ITIL Foundation</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY1007</td>
+                          <td>CompTIA Linux+</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY1009</td>
+                          <td>CompTIA Security+</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY2000</td>
+                          <td>Cisco CCNA</td>
+                          <td>CybraryIT</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CY2001</td>
+                          <td>Computer and Hacking Forensics (CHFI)</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY2004</td>
+                          <td>COBIT</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY2008</td>
+                          <td>Microsoft SharePoint</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY2009</td>
+                          <td>Penetration Testing and Ethical Hacking</td>
+                          <td>CybraryIT</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CY2016</td>
+                          <td>Web Application Penetration Testing</td>
+                          <td>CybraryIT</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>CY3005</td>
+                          <td>Malware Analysis and Reverse Engineering</td>
+                          <td>CybraryIT</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>CY3006</td>
+                          <td>Metasploit</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY3007</td>
+                          <td>PCI/DSS</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CY3011</td>
+                          <td>Corporate Cybersecurity Management</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>CYXXXX</td>
+                          <td>Palo Alto Networks Firewalls</td>
+                          <td>CybraryIT</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>M101P</td>
+                          <td>MongoDB Python Development</td>
+                          <td>MongoDB University</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>PWK</td>
+                          <td>Penetration Testing Training with Kali Linux (OSCP)</td>
+                          <td>Offensive-Security</td>
+                          <td></td>
+                      </tr>
+                      <tr>
+                          <td>SECFND</td>
+                          <td>CCNA Cybersecurity Fundamentals</td>
+                          <td>Cisco</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>SECOPS</td>
+                          <td>CCNA Cybersecurity Operations</td>
+                          <td>Cisco</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>SL1014</td>
+                          <td>HTML5</td>
+                          <td>SoloLearn</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>SL1024</td>
+                          <td>JavaScript</td>
+                          <td>SoloLearn</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>SL1051</td>
+                          <td>C++</td>
+                          <td>SoloLearn</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>SL1059</td>
+                          <td>PHP</td>
+                          <td>SoloLearn</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>SL1060</td>
+                          <td>SQL</td>
+                          <td>SoloLearn</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>SL1068</td>
+                          <td>Java</td>
+                          <td>SoloLearn</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>SL1073</td>
+                          <td>Python 3</td>
+                          <td>SoloLearn</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>SL1081</td>
+                          <td>Ruby</td>
+                          <td>SoloLearn</td>
+                          <td>✔️</td>
+                      </tr>
+                      <tr>
+                          <td>UDACITY</td>
+                          <td>Android Basics Nanodegree</td>
+                          <td>Udacity</td>
+                          <td>⏳</td>
+                      </tr>
+                      <tr>
+                          <td>UDACITY</td>
+                          <td>Android Developer Nanodegree</td>
+                          <td>Udacity</td>
+                          <td>⏳</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
       </div>
     </section>
 
