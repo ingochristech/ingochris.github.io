@@ -78,7 +78,7 @@
             <div class="row">
               <div class="col-sm-6" style="text-align: left">
                 <h2 id="homeHeading">About me</h2>
-                <p>I am a CCNA SECOPS certified engineer who entered the tech scene through the hair-raising vector of penetration testing.</p> 
+                <p>I am a CCNA SECOPS certified engineer who entered the tech scene through the hair-raising vector of penetration testing. My hats include <span class="hats"></span>.</p> 
                 
                 <p>I've grown super involved in the <a href="https://facebook.com/groups/hackathonhackers
 ">Hackathon Hackers</a> community with my free time, and have founded/directed several organizations. In the past few years, I've traveled the world to mentor hackers, compete at CTFs & Hackathons, and train in various disciplines of kinesiology.</p>
@@ -1190,6 +1190,17 @@
           strings: ["Hi, I'm Christopher! 👋"],
           typeSpeed: 0,
           backDelay: 0,
+        });
+      });
+    </script>
+    <script>
+      $(function(){
+        $(".hats").typed({
+          strings: ["Back-End Developer", "Conference Speaker", "Front-End Developer", "\"IT Guy\"", "Linux Engineer", "Pentester", "Security Engineer", "Systems Administrator", "Hackathon Hacker",  ],
+          typeSpeed: 0,
+          backDelay: 666,
+          cursorChar: "|",
+          loop: true
         });
       });
     </script>
