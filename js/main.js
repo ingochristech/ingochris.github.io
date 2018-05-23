@@ -56,8 +56,9 @@
     distance: '0px'
   }, 300);
 
+/*
   // Magnific popup calls
-/*    delegate: 'a',
+    delegate: 'a',
     type: 'image',
     tLoading: 'Loading image #%curr%...',
     mainClass: 'mfp-img-mobile',
