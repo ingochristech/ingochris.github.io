@@ -56,6 +56,15 @@
     distance: '0px'
   }, 300);
 
+  $.getJSON('https://www.reddit.com/r/bodyweightfitness/about.json',function(data){
+  console.log(data);
+  var output = '';  
+  $.each(data, function(key,val){
+    output = data.data.subscribers;
+  });
+  $('#subscribers').html(output);
+  });
+
 /*
   // Magnific popup calls
     delegate: 'a',
