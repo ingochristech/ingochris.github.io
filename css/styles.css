@@ -184,20 +184,9 @@ img::-moz-selection {
 }
 
 
-@media (max-width: 350px) {
+@media (max-width: 330px) {
   .small-drop {
     display: table;
-  }
-}
-
-h1.five {
-  span {
-    background: black;
-    padding: 1px 8px;
-    &::before {
-      content: "";
-      display: block;
-    }
   }
 }
 
