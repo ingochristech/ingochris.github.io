@@ -104,7 +104,11 @@ img::-moz-selection {
 }
 
 #Kinesiology a {
-  color:;
+  color:white;
+}
+
+#Kinesiology h2 {
+  color: #fff;
 }
 
 #mainNav {
