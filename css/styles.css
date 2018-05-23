@@ -30,6 +30,10 @@ table {
 
 }
 
+th{
+  text-align:left;
+}
+
 td {
   text-align:left;
   color: black;
