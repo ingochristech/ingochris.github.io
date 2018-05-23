@@ -1,417 +1,277 @@
-import { initializer } from './initializer.js';
-import { htmlParser } from './html-parser.js';
+// The MIT License (MIT)
 
-/**
- * Welcome to Typed.js!
- * @param {string} elementId HTML element ID _OR_ HTML element
- * @param {object} options options object
- * @returns {object} a new Typed object
- */
-export default class Typed {
-  constructor(elementId, options) {
-    // Initialize it up
-    initializer.load(this, options, elementId);
-    // All systems go!
-    this.begin();
-  }
+// Typed.js | Copyright (c) 2014 Matt Boldt | www.mattboldt.com
 
-  /**
-   * Toggle start() and stop() of the Typed instance
-   * @public
-   */
-  toggle() {
-    this.pause.status ? this.start() : this.stop();
-  }
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 
-  /**
-   * Stop typing / backspacing and enable cursor blinking
-   * @public
-   */
-  stop() {
-    if (this.typingComplete) return;
-    if (this.pause.status) return;
-    this.toggleBlinking(true);
-    this.pause.status = true;
-    this.options.onStop(this.arrayPos, this);
-  }
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 
-  /**
-   * Start typing / backspacing after being stopped
-   * @public
-   */
-  start() {
-    if (this.typingComplete) return;
-    if (!this.pause.status) return;
-    this.pause.status = false;
-    if (this.pause.typewrite) {
-      this.typewrite(this.pause.curString, this.pause.curStrPos);
-    } else {
-      this.backspace(this.pause.curString, this.pause.curStrPos);
-    }
-    this.options.onStart(this.arrayPos, this);
-  }
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
-  /**
-   * Destroy this instance of Typed
-   * @public
-   */
-  destroy() {
-    this.reset(false);
-    this.options.onDestroy(this);
-  }
 
-  /**
-   * Reset Typed and optionally restarts
-   * @param {boolean} restart
-   * @public
-   */
-  reset(restart = true) {
-    clearInterval(this.timeout);
-    this.replaceText('');
-    if (this.cursor && this.cursor.parentNode) {
-      this.cursor.parentNode.removeChild(this.cursor);
-      this.cursor = null;
-    }
-    this.strPos = 0;
-    this.arrayPos = 0;
-    this.curLoop = 0;
-    if (restart) {
-      this.insertCursor();
-      this.options.onReset(this);
-      this.begin();
-    }
-  }
 
-  /**
-   * Begins the typing animation
-   * @private
-   */
-  begin() {
-    this.typingComplete = false;
-    this.shuffleStringsIfNeeded(this);
-    this.insertCursor();
-    if (this.bindInputFocusEvents) this.bindFocusEvents();
-    this.timeout = setTimeout(() => {
-      // Check if there is some text in the element, if yes start by backspacing the default message
-      if (!this.currentElContent || this.currentElContent.length === 0) {
-        this.typewrite(this.strings[this.sequence[this.arrayPos]], this.strPos);
-      } else {
-        // Start typing
-        this.backspace(this.currentElContent, this.currentElContent.length);
-      }
-    }, this.startDelay);
-  }
 
-  /**
-   * Called for each character typed
-   * @param {string} curString the current string in the strings array
-   * @param {number} curStrPos the current position in the curString
-   * @private
-   */
-  typewrite(curString, curStrPos) {
-    if (this.fadeOut && this.el.classList.contains(this.fadeOutClass)) {
-      this.el.classList.remove(this.fadeOutClass);
-      if (this.cursor) this.cursor.classList.remove(this.fadeOutClass);
-    }
+!function($){
 
-    const humanize = this.humanizer(this.typeSpeed);
-    let numChars = 1;
+    "use strict";
 
-    if (this.pause.status === true) {
-      this.setPauseStatus(curString, curStrPos, true);
-      return;
-    }
+    var Typed = function(el, options){
 
-    // contain typing function in a timeout humanize'd delay
-    this.timeout = setTimeout(() => {
-      // skip over any HTML chars
-      curStrPos = htmlParser.typeHtmlChars(curString, curStrPos, this);
+        // chosen element to manipulate text
+        this.el = $(el);
+        // options
+        this.options = $.extend({}, $.fn.typed.defaults, options);
 
-      let pauseTime = 0;
-      let substr = curString.substr(curStrPos);
-      // check for an escape character before a pause value
-      // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
-      // single ^ are removed from string
-      if (substr.charAt(0) === '^') {
-        if (/^\^\d+/.test(substr)) {
-          let skip = 1; // skip at least 1
-          substr = /\d+/.exec(substr)[0];
-          skip += substr.length;
-          pauseTime = parseInt(substr);
-          this.temporaryPause = true;
-          this.options.onTypingPaused(this.arrayPos, this);
-          // strip out the escape character and pause value so they're not printed
-          curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
-          this.toggleBlinking(true);
-        }
-      }
+        // text content of element
+        this.text = this.el.text();
 
-      // check for skip characters formatted as
-      // "this is a `string to print NOW` ..."
-      if (substr.charAt(0) === '`') {
-        while (curString.substr(curStrPos + numChars).charAt(0) !== '`') {
-          numChars++;
-          if (curStrPos + numChars > curString.length) break;
-        }
-        // strip out the escape characters and append all the string in between
-        const stringBeforeSkip = curString.substring(0, curStrPos);
-        const stringSkipped = curString.substring(stringBeforeSkip.length + 1, curStrPos + numChars);
-        const stringAfterSkip = curString.substring(curStrPos + numChars + 1);
-        curString = stringBeforeSkip + stringSkipped + stringAfterSkip;
-        numChars--;
-      }
+        // typing speed
+        this.typeSpeed = this.options.typeSpeed;
 
-      // timeout for any pause after a character
-      this.timeout = setTimeout(() => {
-        // Accounts for blinking while paused
-        this.toggleBlinking(false);
+        // add a delay before typing starts
+        this.startDelay = this.options.startDelay;
 
-        // We're done with this sentence!
-        if (curStrPos === curString.length) {
-          this.doneTyping(curString, curStrPos);
-        } else {
-          this.keepTyping(curString, curStrPos, numChars);
-        }
-        // end of character pause
-        if (this.temporaryPause) {
-          this.temporaryPause = false;
-          this.options.onTypingResumed(this.arrayPos, this);
-        }
-      }, pauseTime);
+        // backspacing speed
+        this.backSpeed = this.options.backSpeed;
 
-      // humanized value for typing
-    }, humanize);
-  }
+        // amount of time to wait before backspacing
+        this.backDelay = this.options.backDelay;
 
-  /**
-   * Continue to the next string & begin typing
-   * @param {string} curString the current string in the strings array
-   * @param {number} curStrPos the current position in the curString
-   * @private
-   */
-  keepTyping(curString, curStrPos, numChars) {
-    // call before functions if applicable
-    if (curStrPos === 0) {
-      this.toggleBlinking(false);
-      this.options.preStringTyped(this.arrayPos, this);
-    }
-    // start typing each new char into existing string
-    // curString: arg, this.el.html: original text inside element
-    curStrPos += numChars;
-    const nextString = curString.substr(0, curStrPos);
-    this.replaceText(nextString);
-    // loop the function
-    this.typewrite(curString, curStrPos);
-  }
+        // input strings of text
+        this.strings = this.options.strings;
 
-  /**
-   * We're done typing all strings
-   * @param {string} curString the current string in the strings array
-   * @param {number} curStrPos the current position in the curString
-   * @private
-   */
-  doneTyping(curString, curStrPos) {
-    // fires callback function
-    this.options.onStringTyped(this.arrayPos, this);
-    this.toggleBlinking(true);
-    // is this the final string
-    if (this.arrayPos === this.strings.length - 1) {
-      // callback that occurs on the last typed string
-      this.complete();
-      // quit if we wont loop back
-      if (this.loop === false || this.curLoop === this.loopCount) {
-        return;
-      }
-    }
-    this.timeout = setTimeout(() => {
-      this.backspace(curString, curStrPos);
-    }, this.backDelay);
-  }
+        // character number position of current string
+        this.strPos = 0;
 
-  /**
-   * Backspaces 1 character at a time
-   * @param {string} curString the current string in the strings array
-   * @param {number} curStrPos the current position in the curString
-   * @private
-   */
-  backspace(curString, curStrPos) {
-    if (this.pause.status === true) {
-      this.setPauseStatus(curString, curStrPos, true);
-      return;
-    }
-    if (this.fadeOut) return this.initFadeOut();
-
-    this.toggleBlinking(false);
-    const humanize = this.humanizer(this.backSpeed);
-
-    this.timeout = setTimeout(() => {
-      curStrPos = htmlParser.backSpaceHtmlChars(curString, curStrPos, this);
-      // replace text with base text + typed characters
-      const curStringAtPosition = curString.substr(0, curStrPos);
-      this.replaceText(curStringAtPosition);
-
-      // if smartBack is enabled
-      if (this.smartBackspace) {
-        // the remaining part of the current string is equal of the same part of the new string
-        let nextString = this.strings[this.arrayPos + 1];
-        if (nextString && curStringAtPosition === nextString.substr(0, curStrPos)) {
-          this.stopNum = curStrPos;
-        } else {
-          this.stopNum = 0;
-        }
-      }
-
-      // if the number (id of character in current string) is
-      // less than the stop number, keep going
-      if (curStrPos > this.stopNum) {
-        // subtract characters one by one
-        curStrPos--;
-        // loop the function
-        this.backspace(curString, curStrPos);
-      } else if (curStrPos <= this.stopNum) {
-        // if the stop number has been reached, increase
-        // array position to next string
-        this.arrayPos++;
-        // When looping, begin at the beginning after backspace complete
-        if (this.arrayPos === this.strings.length) {
-          this.arrayPos = 0;
-          this.options.onLastStringBackspaced();
-          this.shuffleStringsIfNeeded();
-          this.begin();
-        } else {
-          this.typewrite(this.strings[this.sequence[this.arrayPos]], curStrPos);
-        }
-      }
-      // humanized value for typing
-    }, humanize);
-  }
-
-  /**
-   * Full animation is complete
-   * @private
-   */
-  complete() {
-    this.options.onComplete(this);
-    if (this.loop) {
-      this.curLoop++;
-    } else {
-      this.typingComplete = true;
-    }
-  }
-
-  /**
-   * Has the typing been stopped
-   * @param {string} curString the current string in the strings array
-   * @param {number} curStrPos the current position in the curString
-   * @param {boolean} isTyping
-   * @private
-   */
-  setPauseStatus(curString, curStrPos, isTyping) {
-    this.pause.typewrite = isTyping;
-    this.pause.curString = curString;
-    this.pause.curStrPos = curStrPos;
-  }
-
-  /**
-   * Toggle the blinking cursor
-   * @param {boolean} isBlinking
-   * @private
-   */
-  toggleBlinking(isBlinking) {
-    if (!this.cursor) return;
-    // if in paused state, don't toggle blinking a 2nd time
-    if (this.pause.status) return;
-    if (this.cursorBlinking === isBlinking) return;
-    this.cursorBlinking = isBlinking;
-    const status = isBlinking ? 'infinite' : 0;
-    this.cursor.style.animationIterationCount = status;
-  }
-
-  /**
-   * Speed in MS to type
-   * @param {number} speed
-   * @private
-   */
-  humanizer(speed) {
-    return Math.round(Math.random() * speed / 2) + speed;
-  }
-
-  /**
-   * Shuffle the sequence of the strings array
-   * @private
-   */
-  shuffleStringsIfNeeded() {
-    if (!this.shuffle) return;
-    this.sequence = this.sequence.sort(() => Math.random() - 0.5);
-  }
-
-  /**
-   * Adds a CSS class to fade out current string
-   * @private
-   */
-  initFadeOut() {
-    this.el.className += ` ${this.fadeOutClass}`;
-    if (this.cursor) this.cursor.className += ` ${this.fadeOutClass}`;
-    return setTimeout(() => {
-      this.arrayPos++;
-      this.replaceText('');
-
-      // Resets current string if end of loop reached
-      if (this.strings.length > this.arrayPos) {
-        this.typewrite(this.strings[this.sequence[this.arrayPos]], 0);
-      } else {
-        this.typewrite(this.strings[0], 0);
+        // current array position
         this.arrayPos = 0;
-      }
-    }, this.fadeOutDelay);
-  }
 
-  /**
-   * Replaces current text in the HTML element
-   * depending on element type
-   * @param {string} str
-   * @private
-   */
-  replaceText(str) {
-    if (this.attr) {
-      this.el.setAttribute(this.attr, str);
-    } else {
-      if (this.isInput) {
-        this.el.value = str;
-      } else if (this.contentType === 'html') {
-        this.el.innerHTML = str;
-      } else {
-        this.el.textContent = str;
-      }
+        // current string based on current values[] array position
+        this.string = this.strings[this.arrayPos];
+
+        // number to stop backspacing on.
+        // default 0, can change depending on how many chars
+        // you want to remove at the time
+        this.stopNum = 0;
+
+        // Looping logic
+        this.loop = this.options.loop;
+        this.loopCount = this.options.loopCount;
+        this.curLoop = 1;
+        if (this.loop === false){
+            // number in which to stop going through array
+            // set to strings[] array (length - 1) to stop deleting after last string is typed
+            this.stopArray = this.strings.length-1;
+        }
+        else{
+            this.stopArray = this.strings.length;
+        }
+
+        // All systems go!
+        this.build();
     }
-  }
 
-  /**
-   * If using input elements, bind focus in order to
-   * start and stop the animation
-   * @private
-   */
-  bindFocusEvents() {
-    if (!this.isInput) return;
-    this.el.addEventListener('focus', (e) => {
-      this.stop();
-    });
-    this.el.addEventListener('blur', (e) => {
-      if (this.el.value && this.el.value.length !== 0) { return; }
-      this.start();
-    });
-  }
+        Typed.prototype =  {
 
-  /**
-   * On init, insert the cursor element
-   * @private
-   */
-  insertCursor() {
-    if (!this.showCursor) return;
-    if (this.cursor) return;
-    this.cursor = document.createElement('span');
-    this.cursor.className = 'typed-cursor';
-    this.cursor.innerHTML = this.cursorChar;
-    this.el.parentNode && this.el.parentNode.insertBefore(this.cursor, this.el.nextSibling);
-  }
-}
+            constructor: Typed
+
+            , init: function(){
+                // begin the loop w/ first current string (global self.string)
+                // current string will be passed as an argument each time after this
+                var self  = this;
+                setTimeout(function() {
+                    // Start typing
+                    self.typewrite(self.string, self.strPos)
+                }, self.startDelay);
+            }
+
+            , build: function(){
+                // Insert cursor
+                this.el.after("<span id=\"typed-cursor\">|</span>");
+                this.init();
+            }
+
+            // pass current string state to each function
+            , typewrite: function(curString, curStrPos){
+
+                // varying values for setTimeout during typing
+                // can't be global since number changes each time loop is executed
+                var humanize = Math.round(Math.random() * (100 - 30)) + this.typeSpeed;
+                var self = this;
+
+                // ------------- optional ------------- //
+                // backpaces a certain string faster
+                // ------------------------------------ //
+                // if (self.arrayPos == 1){
+                //  self.backDelay = 50;
+                // }
+                // else{ self.backDelay = 500; }
+
+                // contain typing function in a timeout
+                setTimeout(function() {
+
+                    // make sure array position is less than array length
+                    if (self.arrayPos < self.strings.length){
+
+                        // check for an escape character before a pause value
+                        if (curString.substr(curStrPos, 1) === "^") {
+                            var charPauseEnd = curString.substr(curStrPos + 1).indexOf(" ");
+                            var charPause = curString.substr(curStrPos + 1, charPauseEnd);
+                            // strip out the escape character and pause value so they're not printed
+                            curString = curString.replace("^" + charPause, "");
+                        }
+                        else {
+                            var charPause = 0;
+                        }
+
+                        // timeout for any pause after a character
+                        setTimeout(function() {
+
+                            // start typing each new char into existing string
+                            // curString is function arg
+                            self.el.text(self.text + curString.substr(0, curStrPos));
+
+                            // check if current character number is the string's length
+                            // and if the current array position is less than the stopping point
+                            // if so, backspace after backDelay setting
+                            if (curStrPos > curString.length && self.arrayPos < self.stopArray){
+                                clearTimeout(clear);
+                                self.options.onStringTyped();
+                                var clear = setTimeout(function(){
+                                    self.backspace(curString, curStrPos);
+                                }, self.backDelay);
+                            }
+
+                            // else, keep typing
+                            else{
+                                // add characters one by one
+                                curStrPos++;
+                                // loop the function
+                                self.typewrite(curString, curStrPos);
+                                // if the array position is at the stopping position
+                                // finish code, on to next task
+                                if (self.loop === false){
+                                    if (self.arrayPos === self.stopArray && curStrPos === curString.length){
+                                        // animation that occurs on the last typed string
+                                        // fires callback function
+                                        var clear = self.options.callback();
+                                        clearTimeout(clear);
+                                    }
+                                }
+                            }
+
+                        // end of character pause
+                        }, charPause);
+                    }
+                    // if the array position is greater than array length
+                    // and looping is active, reset array pos and start over.
+                    else if (self.loop === true && self.loopCount === false){
+                        self.arrayPos = 0;
+                        self.init();
+                    }
+                        else if(self.loopCount !== false && self.curLoop < self.loopCount){
+                            self.arrayPos = 0;
+                            self.curLoop = self.curLoop+1;
+                            self.init();
+                        }
+
+                // humanized value for typing
+                }, humanize);
+
+            }
+
+            , backspace: function(curString, curStrPos){
+
+                // varying values for setTimeout during typing
+                // can't be global since number changes each time loop is executed
+                var humanize = Math.round(Math.random() * (100 - 30)) + this.backSpeed;
+                var self = this;
+
+                setTimeout(function() {
+
+                    // ----- this part is optional ----- //
+                    // check string array position
+                    // on the first string, only delete one word
+                    // the stopNum actually represents the amount of chars to
+                    // keep in the current string. In my case it's 14.
+                    // if (self.arrayPos == 1){
+                    //  self.stopNum = 14;
+                    // }
+                    //every other time, delete the whole typed string
+                    // else{
+                    //  self.stopNum = 0;
+                    // }
+
+                    // ----- continue important stuff ----- //
+                    // replace text with current text + typed characters
+                    self.el.text(self.text + curString.substr(0, curStrPos));
+
+                    // if the number (id of character in current string) is
+                    // less than the stop number, keep going
+                    if (curStrPos > self.stopNum){
+                        // subtract characters one by one
+                        curStrPos--;
+                        // loop the function
+                        self.backspace(curString, curStrPos);
+                    }
+                    // if the stop number has been reached, increase
+                    // array position to next string
+                    else if (curStrPos <= self.stopNum){
+                        clearTimeout(clear);
+                        var clear = self.arrayPos = self.arrayPos+1;
+                        // must pass new array position in this instance
+                        // instead of using global arrayPos
+                        self.typewrite(self.strings[self.arrayPos], curStrPos);
+                    }
+
+                // humanized value for typing
+                }, humanize);
+
+            }
+
+        }
+
+    $.fn.typed = function (option) {
+        return this.each(function () {
+          var $this = $(this)
+            , data = $this.data('typed')
+            , options = typeof option == 'object' && option
+          if (!data) $this.data('typed', (data = new Typed(this, options)))
+          if (typeof option == 'string') data[option]()
+        });
+    }
+
+    $.fn.typed.defaults = {
+        strings: ["These are the default values...", "You know what you should do?", "Use your own!", "Have a great day!"],
+        // typing speed
+        typeSpeed: 0,
+        // time before typing starts
+        startDelay: 0,
+        // backspacing speed
+        backSpeed: 0,
+        // time before backspacing
+        backDelay: 500,
+        // loop
+        loop: false,
+        // false = infinite
+        loopCount: false,
+        // ending callback function
+        callback: function(){ null },
+        //callback for every typed string
+        onStringTyped: function(){ null }
+    }
+
+
+}(window.jQuery);
