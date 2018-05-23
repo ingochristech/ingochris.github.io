@@ -183,6 +183,24 @@ img::-moz-selection {
   background-color: transparent;
 }
 
+
+@media (max-width: 767px) {
+  .small-drop {
+    display: table;
+  }
+}
+
+h1.five {
+  span {
+    background: black;
+    padding: 1px 8px;
+    &::before {
+      content: "";
+      display: block;
+    }
+  }
+}
+
 @media (min-width: 992px) {
   #mainNav {
     border-color: transparent;
