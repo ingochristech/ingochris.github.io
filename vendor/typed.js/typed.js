@@ -99,7 +99,7 @@
 
             , build: function(){
                 // Insert cursor
-                this.el.after("<span id=\"typed-cursor\">|</span>");
+                //this.el.after("<span id=\"typed-cursor\">|</span>");	ingochris180523removecursor
                 this.init();
             }
 
