@@ -26,10 +26,6 @@ table, th, td {
   border-spacing: 10px;
 }
 
-table {
-
-}
-
 th{
   text-align:left;
 }
@@ -353,6 +349,11 @@ header.masthead p {
   .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
     font-size: 22px;
   }
+}
+
+.no-margin {
+  margin: 0;
+  padding: 0;
 }
 
 .text-primary {
