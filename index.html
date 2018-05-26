@@ -77,24 +77,6 @@
 
     <header class="masthead text-center text-white d-flex">
 
-        <div class="social head">
-            <div class="icon">
-                <div class="instagram ss-icon ss-social-circle ss-instagram"></div>
-                <div class="btn_fs">
-                    <a href="https://www.instagram.com/ingochris" target="_blank">
-                        <div class="follow">instagram.com/ingochris <i class="fa fa-instagram"></i></div>
-                    </a>
-                </div>
-            </div>
-            <div class="icon">
-                <div class="twitter ss-icon ss-social-circle ss-twitter"></div>
-                <div class="btn_fs">
-                    <a href="https://twitter.com/ingochristech" target="_blank">
-                        <div class="follow">twitter.com/ingochristech <i class="fa fa-twitter"></i></div>
-                    </a>
-                </div>
-            </div>
-        </div>
 
       <div class="container my-auto">
         <div class="row">
@@ -154,6 +136,7 @@
             </div>
           </div>
         </div>
+
          <!---<a class="btn btn-primary btn-xl js-scroll-trigger" href="#Development">Find Out More</a>-->
           </div>
         </div>
@@ -1124,7 +1107,7 @@
               <div class="col-lg-4 text-center">
                 <h3 class="section-heading text-white">Ancillary Athletics</h3>
 
-                <p>For Strength Training, I adhere to <a href="https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine" target="_blank" rel="noopener">Reddit Bodyweight Fitness's RR</a> (Recommended Routine). As part of the modteam, I maintain the subreddit while constantly improving our <a href="https://www.reddit.com/r/bodyweightfitness/wiki/index" target="_blank" rel="noopener">knowledge base</a> to advise and share best exercise/nutrition/skillwork practices with the <a href="https://discord.gg/cNX6Hjf" target="_blank" rel="noopener">RedditBWF Community</a>. I also train with <a href="https://www.youtube.com/user/OfficialBarstarzz" target="_blank" rel="noopener">Barstarzz</a>.</p>
+                <p>For Strength Training, I adhere to <a href="https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine" target="_blank" rel="noopener">Reddit Bodyweight Fitness's RR</a> (Recommended Routine). As part of the modteam, I maintain the subreddit while constantly improving our <a href="https://www.reddit.com/r/bodyweightfitness/wiki/index" target="_blank" rel="noopener">knowledge base</a> to advise and share best exercise/nutrition/skillwork practices with the <a href="https://discord.gg/cNX6Hjf" target="_blank" rel="noopener">RedditBWF Community</a>.</p> <p>I also train with <a href="https://www.youtube.com/user/OfficialBarstarzz" target="_blank" rel="noopener">Barstarzz</a>.</p>
                 <a class="btn btn-dark btn-xl js-scroll-trigger mb-4" href="https://www.reddit.com/r/bodyweightfitness" target="_blank" rel="noopener">Live: <u><span id="subscribers"></span></u> BWFers 💪 </a>
               </div>
             
@@ -1208,7 +1191,29 @@
               </div>
             </div>
               
-            <div class="col-lg-6 text-center">hi
+            <div class="col-lg-6 text-center">
+
+              <div id="map"></div>
+              <script>
+          // Initialize and add the map
+          function initMap() {
+            // The location of ingochristech  
+            var ingochristech = {lat: 37.548844, lng: -122.058975};
+            // The map, centered at ingochristech
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 6, center: ingochristech});
+            // The marker, positioned at ingochristech
+            var marker = new google.maps.Marker({position: ingochristech, map: map});
+          }
+              </script>
+              <!--Load the API from the specified URL
+              * The async attribute allows the browser to render the page while the API loads
+              * The key parameter will contain your own API key (which is not needed for this tutorial)
+              * The callback parameter executes the initMap() function
+              -->
+              <script async defer
+              src="https://maps.googleapis.com/maps/api/js?&callback=initMap">
+              </script>
 
               </div>
             </div>
@@ -1216,35 +1221,10 @@
         </div>
       </div>
 
-
-        <div class="row">
-          <div class="container col-lg-2">
-          
-
-          </div>
-        </div>
-            <script>
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL9EXU5rBWx0odb9VkohFAe50ta3JGJIM&callback=initMap">
-    </script>
-
         <div class="text-center"><br><u>Human Language Compatibility Chart</u> <br>
           Native: English+Việt.<br>
-          2002: 日本語+Español+Français.<br>
-          2016: 한국어+русский.<br>
-          2017: Italiano+Română+Valyrian.<br>
-          2018: 普通话+Deutsche+Português.
+          Proficient: Español+Français+Português+Valyrian.<br>
+          Elementary: Deutsche+한국어+Italiano+日本語+усский+Română+普通话.
         </div>
       </div>
     </section>
@@ -1274,7 +1254,7 @@ function initMap() {
     <script>
       $(function(){
         $(".hats").typed({
-          strings: ["Back-End Dev", "Creator", "Hardware Hacker", "Network Engineer", "Conference Speaker", "Front-End Dev", "\"IT Guy\"", "Mentor", "Linux Engineer", "Pentester", "Security Engineer", "Systems Admin", "Hackathon Hacker", "Designer", "Organizer"],
+          strings: ["Back-End Dev", "Creator", "Hardware Hacker", "Network Engineer", "Conference Speaker", "Front-End Dev", "\"IT Guy\"", "Mentor", "Linux Engineer", "Pentester", "Security Engineer", "Systems Admin", "Hackathoner", "Designer", "Organizer"],
           typeSpeed: 0,
           backDelay: 333,
           backSpeed:50,
