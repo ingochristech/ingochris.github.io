@@ -53,19 +53,19 @@
               <a class="nav-link js-scroll-trigger" href="#page-top">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#Security">Security</a>
+              <a class="nav-link js-scroll-trigger" href="#security">Security</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#Development">Development</a>
+              <a class="nav-link js-scroll-trigger" href="#development">Development</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#Education">Education</a>
+              <a class="nav-link js-scroll-trigger" href="#education">Education</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#Kinesiology">Kinesiology</a>
+              <a class="nav-link js-scroll-trigger" href="#kinesiology">Kinesiology</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#Contact">Contact</a>
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="https://github.com/ingochris/resume/blob/master/ChristopherNgo.pdf" target="_blank" rel="noopener">Resume</a>
@@ -134,7 +134,7 @@
           <a href="https://www.instagram.com/ingochris" target="_blank" rel="noopener"><i class="fa fa-instagram fa-2x sr-contact"></i></a>
           <a href="https://www.freecodecamp.com/ingochris" target="_blank" rel="noopener"><i class="fa fa-free-code-camp fa-2x sr-contact"></i></a>
           <a href="https://www.duome.eu/ingochris" target="_blank" rel="noopener"><i class="fa fa-language fa-2x sr-contact"></i></a>
-          <a href="#Contact"><i class="fa fa-envelope fa-2x sr-contact"></i></a>
+          <a class="js-scroll-trigger" href="#contact"><i class="fa fa-envelope fa-2x sr-contact"></i></a>
           <a href="https://freecodecamp.com/ingochris" target="_blank" rel="noopener"><i class="fa fa-reddit-alien fa-2x sr-contact"></i></a>
           <a href="https://www.twitter.com/ingochristech" target="_blank" rel="noopener"><i class="fa fa-twitter fa-2x sr-contact"></i></a>
         </div>
@@ -148,7 +148,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Cybersecurity</h2>
+            <h2 id="security" class="section-heading">Cybersecurity</h2>
             <hr class="my-4">
             <p>
               I practice offensive security in order to improve defense of computers, networks, software, data or information systems against viruses, worms, spyware, malware, intrusion detection, unauthorized access, denial-of-service attacks, and an ever increasing list of attacks by hackers acting as individuals or as part of organized crime or foreign governments.</p>
@@ -199,7 +199,7 @@
       </div>
     </section>
 
-    <section class="p-0" id="Development">
+    <section class="p-0" id="development">
 
       <div class="container-fluid p-0">
         <div class="row no-gutters">
@@ -618,7 +618,7 @@
 
       <div class="container col-lg-10 text-center">
 
-      <h2 class="section-heading text-center">Education</h2>
+      <h2 id="education" class="section-heading text-center">Education</h2>
       <hr class="my-4">
             <div class="row">
 
@@ -1006,7 +1006,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading text-white">Olympics 2020</h2>
+            <h2 id="kinesiology" class="section-heading text-white">Olympics 2020</h2>
             <hr class="light my-4">
             <p class="text-faded mb-4">
               <p>I began playing badminton in 2004 at Bintang, and went on to train at Smash City and BBC3. I qualified for U15 Jr. Nationals, then started my high school badminton career as Varsity 1 BS for MHS in SCVAL of California Interscholastic CCS. I have also competed in many open tournaments at Flights C and D, in events: MD, MS, and XD. At Mission College, I helped train the Women's Intercollegiate team.</p> 
@@ -1044,7 +1044,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-12 mx-auto text-center">
-              <h2 class="section-heading">Let's Get In Touch!</h2>
+              <h2 class="section-heading" id="contact">Let's Get In Touch!</h2>
 
               <div class="about-icons">              
                 <a href="https://www.linkedin.com/in/ingochris" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-2x sr-contact"></i></a>
@@ -1069,11 +1069,11 @@
               <div class="col-lg-6 text-center">
                   <h3>Contact</h3>
                   <div class="text-left">
-                    <p>Please use the form below to encrypt your message for secure communication (<a href="https://openpgpjs.org" target="_blank" rel="noopener">OpenPGP.js)</a>.</p>
+                    <p>Please use <strong>ENCRYPT</strong> below for secure communication. If your browser doesn't support mailto-form, <strong>COPY</strong> and send to <a href="mailto:christopher@ingochris.tech">christopher@ingochris.tech</a>.</p> 
                     <form action="mailto:ingochristech@gmail.com" target="_blank" method="GET">
-                      <input class="form-control" id="name" type="text" placeholder="Subject" name="Subject">   
+                      <input class="form-control" id="name" type="text" placeholder="Plaintext Subject" name="Subject">   
 
-                      <textarea class="form-control" id="form" type="text" placeholder="Plaintext Message" required="required" data-validation-required-message="Please enter your name." aria-invalid="false" name="body" id="input" style='width: 100%; min-height: 42px'></textarea>
+                      <textarea class="form-control" id="form" type="text" placeholder="Ciphertext Message" required="required" data-validation-required-message="Please enter your name." aria-invalid="false" name="body" id="input" style='width: 100%; min-height: 42px'></textarea>
 
                       <button type="button" id="encrypt" onClick="encryptMessage()">Encrypt</button>
                       <button type="button" onClick="copyForm()">Copy</button>
@@ -1081,8 +1081,8 @@
                       <button type="reset" value="Reset">Reset</button>
                     </form><br>
 
-                    <p>For offline encryption, my PGP Public Key is available <a href="public.asc" target="_blank" rel="noopener">here 🔒</a>. </p>
-                    <p>For offline verification, my fingerprint is:</p><p class="text-center"><span class="fingerprint" text-center>390D C31A 352E BC23 A5AC 27E1 28BE AA9D 542B 7B5C</span></p>
+                    <p>For offline encryption, my PGP Public Key is available <a href="public.asc" target="_blank" rel="noopener">here 🔒</a>.<br>For offline verification, my fingerprint is:</p><p class="text-center"><span class="fingerprint" text-center>390D C31A 352E BC23 A5AC 27E1 28BE AA9D 542B 7B5C</span></p>
+                    <p><strong>Human Languages:</strong> Native[2] = {English, Việt}; Proficient[4] = {Español, Français, Português, Valyrian}; Elementary[7] = {普通话, Deutsche, Italiano, 日本語, 한국어, Română, усский};</p>
                   </div>
                   <div></div>
               </div>
@@ -1090,19 +1090,13 @@
                             
               <div class="col-lg-6 text-center">
                   <h3>Location</h3>
-                  <iframe width=100% height="350" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJTXpXwkK-j4AR9EJzWafCFvs&key=AIzaSyASt7PEEOUf2msM189jzd1EAeBTS5a8dhY" allowfullscreen></iframe>
-              
+
+                  <iframe width=100% height="430" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJTXpXwkK-j4AR9EJzWafCFvs&key=AIzaSyASt7PEEOUf2msM189jzd1EAeBTS5a8dhY" allowfullscreen></iframe>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-        <div class="text-center"><br><u>Human Language Compatibility Chart</u> <br>
-          Native: English + Việt.<br>
-          Proficient: Español + Français + Português + Valyrian.<br>
-          Elementary: Deutsche+한국어 + Italiano + 日本語 + усский+Română + 普通话.
-        </div>
       </div>
     </section>
       <div class="text-center"><p>© Christopher Ngo, 2006-<script>new Date().getFullYear()>document.write(new Date().getFullYear());</script>. All rights reserved. Unathorized use prohibited.</p></div>
