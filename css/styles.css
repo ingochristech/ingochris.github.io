@@ -276,8 +276,8 @@ header.masthead p {
   header.masthead {
     height: 100vh;
     min-height: 650px;
-    padding-top: 50px;
-    padding-bottom: 0;
+    padding-top: 42px;
+    padding-bottom: 0px;
   }
   header.masthead h1 {
     font-size: 3rem;
@@ -289,6 +289,11 @@ header.masthead p {
     font-size: 4rem;
   }
 }
+
+#about-icons > i {
+    padding: 0 4px; }
+  .footer .icons i:hover {
+    color: #bbb; }
 
 .service-box {
   max-width: 400px;
@@ -390,4 +395,13 @@ header.masthead p {
 
 .btn-primary:active, .btn-primary:focus {
   box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important;
+}
+
+.fingerprint{
+    display:block;
+    background-color:#f5f5f5;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:4px;
+    font-family:liberation mono,Menlo,Monaco,Consolas,courier new,monospace
 }
