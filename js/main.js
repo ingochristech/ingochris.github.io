@@ -83,6 +83,19 @@
 
 })(jQuery); // End of use strict
 
+var userFeed = new Instafeed({
+    get: 'user',
+    userId: '247436752',
+    clientId: '37102235eed94cef9295123e70adbb4a',
+    accessToken:'247436752.3710223.f222b1422d094abaa1a356e6cc298cbc',
+    resolution: 'standard_resolution',
+    template: '<a href="{{link}}" target="_blank" id="{{id}}"><img width="10%" src="{{image}}" /></a>',
+    sortBy: 'most-recent',
+    limit: 20,
+    links: false
+  });
+  userFeed.run();
+
 function encryptMessage() {
     if (window.crypto.getRandomValues) {
         if (document.getElementById("form").value != "") {
